@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)buid\$(Configuration)\$(Platform)</OutDir>
-    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017\x64;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(LibraryPath)</LibraryPath>
     <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
@@ -86,13 +86,13 @@
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
     <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -153,7 +153,13 @@
   <ItemGroup>
     <ClCompile Include="..\dependencies\aie\Gizmos.cpp" />
     <ClCompile Include="..\dependencies\glcore\gl_core_4_4.c" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Application3D.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Application3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
