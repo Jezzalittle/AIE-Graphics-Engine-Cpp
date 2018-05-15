@@ -4,21 +4,63 @@
 #include <iostream>
 #include <Gizmos.h>
 
-Application::Application(const char * a_windowName, int a_width, int a_height)
+Application::Application()
+{
+	m_window = nullptr;
+	m_windowName = nullptr;
+	m_width = 0;
+	m_height = 0;
+	m_startTime = ::std::chrono::high_resolution_clock::now();
+	m_lastFrameTime = m_startTime;
+	m_elapsedTime = 0.0f;
+}
+
+
+int Application::run(const char* a_windowName, int a_width, int a_height)
+{
+
+
+	if (createWindow(a_windowName, a_width, a_height) == 0 && onStartup() == 0)
+	{
+		while (!glfwWindowShouldClose(m_window))
+		{
+			auto now = std::chrono::high_resolution_clock::now();
+			auto timeTaken = now - m_lastFrameTime;
+			float dt = std::chrono::duration<float>(timeTaken).count();
+			m_lastFrameTime = now;
+			m_elapsedTime = (now - m_startTime).count();
+
+			glClearColor(m_backgroundColour.x, m_backgroundColour.y, m_backgroundColour.z, m_backgroundColour.w);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glfwSwapBuffers(m_window);
+			glfwPollEvents();
+			update();
+			draw();
+
+		}
+
+		onShutdown();
+		shutdown();
+
+	}
+	return 0;
+}
+
+void Application::clearScreen()
+{
+	glClearColor(GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT);
+}
+
+int Application::createWindow(const char* a_windowName, int a_width, int a_height)
 {
 	m_windowName = a_windowName;
 	m_width = a_width;
 	m_height = a_height;
-}
 
-int Application::Startup()
-{
 	if (glfwInit() == false)
 	{
 		return -1;
 	}
-
-
 
 	m_window = glfwCreateWindow(m_width, m_height, m_windowName, nullptr, nullptr);
 
@@ -43,29 +85,17 @@ int Application::Startup()
 
 	glEnable(GL_DEPTH);
 
-	Run();
-
 	return 0;
 }
 
-void Application::Run(const char* a_windowName, int a_width, int a_height)
+void Application::shutdown()
 {
-	if (createWindow(a_windowName, a_width, a_height) == 0 && Startup() == 0)
-	{
-		while (!glfwWindowShouldClose(m_window))
-		{
-			glClearColor(0, 0, 0, 0);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glfwSwapBuffers(m_window);
-			glfwPollEvents();
-		}
-	}
-
+	glfwDestroyWindow(m_window);
+	glfwTerminate();
 }
 
 
 Application::~Application()
 {
-	glfwDestroyWindow(m_window);
-	glfwTerminate();
+
 }

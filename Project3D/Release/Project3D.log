@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Application3D.cpp
+c:\users\s170895\desktop\graphics engine\opengl engine\openglengine\application.h(21): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+LINK : fatal error LNK1181: cannot open input file 'OpenGLEngine.lib'

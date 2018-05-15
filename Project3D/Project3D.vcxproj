@@ -20,32 +20,32 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{F1F7929F-AA52-4431-BC06-C12451C895D2}</ProjectGuid>
-    <RootNamespace>OpenGLEngine</RootNamespace>
+    <ProjectGuid>{FB866190-22F8-4FFC-A64D-73FB67DD27FB}</ProjectGuid>
+    <RootNamespace>Project3D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -69,32 +69,37 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
-    <IncludePath>$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017\x64;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(LibraryPath)</LibraryPath>
-    <TargetName>$(ProjectName)_d</TargetName>
-    <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
-    <IncludePath>$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017\x64;$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(LibraryPath)</LibraryPath>
-    <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
-    <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine;$(WindowsSDK_IncludePath); $(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;</IncludePath>
+    <LibraryPath>$(SolutionDir)build\Debug\Win32;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)temp\$(Configuration)\$(Platform)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\glfw\lib-vc2017;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine;$(WindowsSDK_IncludePath); $(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;;$(IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)build\Debug\Win32;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
+    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine;$(WindowsSDK_IncludePath);$(IncludePath);</IncludePath>
+    <LibraryPath>$(SolutionDir)build\Debug\Win32;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
+    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine;$(WindowsSDK_IncludePath);  $(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;;$(IncludePath);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)build\Debug\Win32;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -103,27 +108,8 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;OpenGLEngine_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>glfw3.lib; opengl32.lib</AdditionalDependencies>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Lib>
-      <AdditionalDependencies>glfw3.lib; opengl32.lib</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -137,45 +123,30 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>glfw3.lib; opengl32.lib</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>glfw3.lib; opengl32.lib</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\dependencies\aie\Gizmos.cpp" />
-    <ClCompile Include="..\dependencies\aie\Shader.cpp" />
-    <ClCompile Include="..\dependencies\glcore\gl_core_4_4.c" />
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="FPSCamera.cpp" />
-    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Application3D.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="FPSCamera.h" />
-    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Application3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
