@@ -4,7 +4,7 @@
 #include <glm\ext.hpp>
 #include <glm\glm.hpp>
 #include <Shader.h>
-#include <Camera.h>
+#include <FPSCamera.h>
 
 class Application3D : public Application
 {
@@ -20,7 +20,7 @@ public:
 
 protected:
 
-	Camera* cam;
+	FPSCamera* m_cam;
 	glm::mat4 m_viewMatrix;
 	glm::mat4 m_projectionMatrix;
 	aie::ShaderProgram m_shader;

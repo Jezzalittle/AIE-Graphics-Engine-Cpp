@@ -18,7 +18,7 @@ public:
 	int run(const char* a_windowName, int a_width, int a_height);
 
 
-	int getDeltaTime() { return m_dt; }
+	float getDeltaTime() { return m_dt; }
 	int getWindowWidth() { return m_width; }
 	int getWindowHeight() { return m_height; }
 	const char* getWindowName() { return m_windowName; }

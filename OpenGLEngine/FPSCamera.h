@@ -4,7 +4,8 @@ class FPSCamera : public Camera
 {
 public:
 
-	FPSCamera();
+	FPSCamera(float a_speed, float a_rotSpeed);
+	FPSCamera() = delete;
 
 	void update(struct GLFWwindow* window, float dt) override;
 

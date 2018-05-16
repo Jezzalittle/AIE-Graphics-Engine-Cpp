@@ -3,8 +3,10 @@
 #include <GLFW\glfw3.h>
 
 
-FPSCamera::FPSCamera()
+FPSCamera::FPSCamera(float a_speed, float a_rotspeed)
 {
+	m_moveSpeed = a_speed;
+	m_roatateSpeed = a_rotspeed;
 }
 
 void FPSCamera::update(struct GLFWwindow* window, float dt)

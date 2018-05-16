@@ -26,16 +26,18 @@ int Application::run(const char* a_windowName, int a_width, int a_height)
 		{
 			auto now = std::chrono::high_resolution_clock::now();
 			auto timeTaken = now - m_lastFrameTime;
-			float dt = std::chrono::duration<float>(timeTaken).count();
+			m_dt = std::chrono::duration<float>(timeTaken).count();
 			m_lastFrameTime = now;
 			m_elapsedTime = (now - m_startTime).count();
 
 			glClearColor(m_backgroundColour.x, m_backgroundColour.y, m_backgroundColour.z, m_backgroundColour.w);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glfwSwapBuffers(m_window);
-			glfwPollEvents();
+
 			update();
 			draw();
+
+			glfwSwapBuffers(m_window);
+			glfwPollEvents();
 
 		}
 
@@ -49,6 +51,7 @@ int Application::run(const char* a_windowName, int a_width, int a_height)
 void Application::clearScreen()
 {
 	glClearColor(GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT);
+	aie::Gizmos::clear();
 }
 
 int Application::createWindow(const char* a_windowName, int a_width, int a_height)
