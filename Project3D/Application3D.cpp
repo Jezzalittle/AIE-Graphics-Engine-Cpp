@@ -13,8 +13,8 @@ int Application3D::onStartup()
 	aie::Gizmos::create(10000, 10000, 10000, 10000);
 
 	// create simple camera transforms
-	m_cam->setView(glm::lookAt(glm::vec3(10), glm::vec3(0), glm::vec3(0, 1, 0)));
-	m_cam->setProjection(glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f));
+	m_cam->setViewMatrix(glm::lookAt(glm::vec3(10), glm::vec3(0), glm::vec3(0, 1, 0)));
+	m_cam->setProjectionMatrix(glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f));
 
 
 	m_shader.loadShader(aie::eShaderStage::VERTEX,
@@ -27,6 +27,23 @@ int Application3D::onStartup()
 		printf("Shader Error: %s\n", m_shader.getLastError());
 		return false;
 	}
+
+	//adding bunny mesh
+
+	/*if (m_bunnyMesh.load("./stanford/bunny.obj") == false) 
+	{
+		printf("Bunny Mesh Error!\n");
+		return false;
+	} */
+
+	/*m_bunnyTransform = 
+	{
+		0.5f,0,0,0,
+		0,0.5f,0,0,
+		0,0,0.5f,0,
+		0,0,0,1
+	}; */
+
 
 	m_quadMesh.initialiseQuad();
 
@@ -66,11 +83,15 @@ void Application3D::draw()
 	m_shader.bind();
 
 	// bind transform
-	auto pvm = m_cam->getClipSpace() * m_quadTransform;
+	auto pvm = m_cam->getProjectionView() * m_quadTransform;
 	m_shader.bindUniform("ProjectionViewModel", pvm);
 
 	// draw quad
 	m_quadMesh.draw();
+
+	//draw bunny
+	//m_bunnyMesh.draw();
+
 
 	aie::Gizmos::addTransform(glm::mat4(1));
 
@@ -85,7 +106,7 @@ void Application3D::draw()
 
 
 	// draw 3D gizmos
-	aie::Gizmos::draw(m_cam->getClipSpace());
+	aie::Gizmos::draw(m_cam->getProjectionView());
 
 	// draw 2D gizmos using an orthogonal projection matrix
 	aie::Gizmos::draw2D((float)getWindowWidth(), (float)getWindowHeight());

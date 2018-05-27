@@ -4,10 +4,10 @@
 
 Camera::Camera()
 {
-	m_worldTrasform = glm::mat4(1);
-	m_projection = glm::mat4(1);
+	m_worldTransform = glm::mat4(1);
+	m_projectionMatrix = glm::mat4(1);
 	m_hasSetProjectionMatrix = false;
-
+	m_hasSetViewMatrix = false;
 }
 
 

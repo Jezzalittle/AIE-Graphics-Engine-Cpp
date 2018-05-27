@@ -1,7 +1,12 @@
 #pragma once
-
-#include <glm/ext.hpp>
+#pragma warning( push )
+#pragma warning( disable : 4201 )
+#pragma warning( disable : 4310 )
 #include <glm/glm.hpp>
+#include <glm/ext.hpp>
+#pragma warning( pop )
+
+
 
 class Camera
 {
@@ -9,47 +14,87 @@ public:
 
 	Camera();
 
-
-	void translate(glm::vec4 amount) { m_worldTrasform[3] += amount; }
-
-
-	const glm::mat4& getTrasform() const { return m_worldTrasform; }
-	glm::mat4& getTrasform() { return m_worldTrasform; }
-
-	glm::vec4 getPosition() const { return m_worldTrasform[3]; };
-	void setPosition(glm::vec4 position) { m_worldTrasform[3] = position; }
-
-	void setView(glm::mat4 mat) { m_view = mat; }
-	glm::mat4 getView() const { return m_view; }
-
-	const glm::mat4& getProjection() const { assert(m_hasSetProjectionMatrix); return m_projection; }
-	void setProjection(glm::mat4 mat)
+	void setPosition(float a_x, float a_y, float a_z)
 	{
-		m_projection = mat;
-		if (m_view == glm::mat4(1))
-		{
-			m_view = glm::inverse(m_projection);
-		}
-
+		m_worldTransform[3][0] = a_x;
+		m_worldTransform[3][1] = a_y;
+		m_worldTransform[3][2] = a_z;
+	}
+	void setPosition(glm::vec4 a_postion)
+	{
+		m_worldTransform[3] = a_postion;
+	}
+	void translate(glm::vec4 a_positionModifier)
+	{
+		m_worldTransform[3] += a_positionModifier;
+	}
+	void setTransform(glm::mat4 a_transform)
+	{
+		m_worldTransform += a_transform;
+	}
+	void setProjectionMatrix(glm::mat4 a_projectionMatrix)
+	{
 		m_hasSetProjectionMatrix = true;
+		m_projectionMatrix = a_projectionMatrix;
+	}
+	void setViewMatrix(glm::mat4 a_viewMatrix)
+	{
+		m_worldTransform = glm::inverse(a_viewMatrix);
+	}
+	void lookAt(glm::vec3 a_position)
+	{
+		auto view = glm::lookAt(glm::vec3(m_worldTransform[3]), a_position, glm::vec3(m_worldUp));
+		m_worldTransform = glm::inverse(view);
+	}
+	glm::mat4 getViewMatrix() const
+	{
+		if (m_hasSetViewMatrix)
+		{
+			return m_worldTransform;
+		}
+		else
+		{
+			return glm::inverse(m_worldTransform);
+		}
+	}
+	const glm::mat4 getTransform() const
+	{
+		return m_worldTransform;
+	}
+	const glm::mat4 getProjectionMtrix() const
+	{
+		assert(m_hasSetProjectionMatrix == true);
+		return m_projectionMatrix;
+	}
+	glm::mat4 getTransform()
+	{
+		return m_worldTransform;
+	}
+	glm::mat4 getProjectionView()
+	{
+		return getProjectionMtrix() * getViewMatrix();
+	}
+	glm::vec4 getPosition() const
+	{
+		return m_worldTransform[3];
 	}
 
-	glm::mat4 getClipSpace() { return m_projection * m_view;  }
+	virtual void update(struct GLFWwindow* window, float dt) = 0;
 
+	glm::vec4& m_forward = m_worldTransform[2];
+	glm::vec4& m_right = m_worldTransform[0];
+	glm::vec4& m_up = m_worldTransform[1];
+	glm::vec4 m_worldForward = glm::vec4(0, 0, -1, 0);
+	glm::vec4 m_worldRight = glm::vec4(1, 0, 0, 0);
+	glm::vec4 m_worldUp = glm::vec4(0, 1, 0, 0);
 
-	virtual void update(struct GLFWwindow* window, float dt) {};
-
-
-
-	virtual ~Camera();
-
+	~Camera();
 
 private:
+	glm::mat4 m_worldTransform;
+	glm::mat4 m_projectionMatrix;
 
-	bool m_hasSetProjectionMatrix;
-	glm::mat4 m_projection;
-	glm::mat4 m_worldTrasform;
-	glm::mat4 m_view;
+	bool m_hasSetProjectionMatrix = false;
+	bool m_hasSetViewMatrix = false;
 
 };
-
