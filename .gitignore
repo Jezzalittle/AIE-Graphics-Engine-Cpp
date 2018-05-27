@@ -1,3 +1,7 @@
 temp/
 .vs/
 build/
+x64/
+Debug/
+
+
