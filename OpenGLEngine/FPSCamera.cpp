@@ -34,7 +34,6 @@ void FPSCamera::update(struct GLFWwindow* window, float dt)
 	}
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 	{
-
 		translate(wUp * dt * m_moveSpeed);
 	}
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)

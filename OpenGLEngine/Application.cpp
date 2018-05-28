@@ -33,6 +33,8 @@ int Application::run(const char* a_windowName, int a_width, int a_height)
 			glClearColor(m_backgroundColour.x, m_backgroundColour.y, m_backgroundColour.z, m_backgroundColour.w);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+
 			update();
 			draw();
 
@@ -87,6 +89,11 @@ int Application::createWindow(const char* a_windowName, int a_width, int a_heigh
 	std::cout << major << "." << minor << std::endl;
 
 	glEnable(GL_DEPTH);
+	// Enable Face culling
+	glEnable(GL_CULL_FACE);
+	// Enable depth testing
+	glEnable(GL_DEPTH_TEST);
+
 
 	return 0;
 }

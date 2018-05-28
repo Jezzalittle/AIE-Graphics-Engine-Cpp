@@ -5,7 +5,8 @@
 #include <glm\glm.hpp>
 #include <Shader.h>
 #include <FPSCamera.h>
-#include <OBJMesh.h>
+
+#include "GameObject.h"
 
 class Application3D : public Application
 {
@@ -26,8 +27,10 @@ protected:
 	glm::mat4 m_projectionMatrix;
 	aie::ShaderProgram m_shader;
 
-	//aie::OBJMesh  m_bunnyMesh;
-	//glm::mat4 m_bunnyTransform;
+
+	GameObject m_bunny;
+	aie::OBJMesh  m_bunnyMesh;
+	glm::mat4 m_bunnyTransform;
 
 	Mesh m_quadMesh;
 	glm::mat4 m_quadTransform;

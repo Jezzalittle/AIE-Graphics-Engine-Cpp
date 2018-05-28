@@ -7,7 +7,7 @@ int Application3D::onStartup()
 {
 	m_cam = new FPSCamera(5,5);
 
-
+	m_bunny = GameObject();
 	setBackgroundColour(0, 0, 0);
 	// initialise gizmo primitive counts
 	aie::Gizmos::create(10000, 10000, 10000, 10000);
@@ -16,7 +16,7 @@ int Application3D::onStartup()
 	m_cam->setViewMatrix(glm::lookAt(glm::vec3(10), glm::vec3(0), glm::vec3(0, 1, 0)));
 	m_cam->setProjectionMatrix(glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f));
 
-
+	
 	m_shader.loadShader(aie::eShaderStage::VERTEX,
 		"./shaders/simple.vert");
 	m_shader.loadShader(aie::eShaderStage::FRAGMENT,
@@ -30,20 +30,13 @@ int Application3D::onStartup()
 
 	//adding bunny mesh
 
-	/*if (m_bunnyMesh.load("./stanford/bunny.obj") == false) 
-	{
-		printf("Bunny Mesh Error!\n");
-		return false;
-	} */
-
-	/*m_bunnyTransform = 
-	{
+	m_bunny.loadMesh("./stanford/bunny.obj");
+	m_bunny.setTrasform({
 		0.5f,0,0,0,
 		0,0.5f,0,0,
 		0,0,0.5f,0,
 		0,0,0,1
-	}; */
-
+	});
 
 	m_quadMesh.initialiseQuad();
 
@@ -83,14 +76,21 @@ void Application3D::draw()
 	m_shader.bind();
 
 	// bind transform
-	auto pvm = m_cam->getProjectionView() * m_quadTransform;
+	auto pvm = m_cam->getProjectionView() * m_bunnyTransform;
+	m_shader.bindUniform("ProjectionViewModel", pvm);
+
+
+	//draw bunny
+	m_bunny.getMesh().draw();
+
+	// bind transform
+	pvm = m_cam->getProjectionView() * m_quadTransform;
 	m_shader.bindUniform("ProjectionViewModel", pvm);
 
 	// draw quad
 	m_quadMesh.draw();
 
-	//draw bunny
-	//m_bunnyMesh.draw();
+
 
 
 	aie::Gizmos::addTransform(glm::mat4(1));
