@@ -12,7 +12,7 @@ class Application3D : public Application
 {
 public:
 
-	Application3D() : Application() {}
+	Application3D() : Application() {};
 	virtual int onStartup();
 	virtual void onShutdown();
 	virtual void update();
@@ -28,9 +28,8 @@ protected:
 	aie::ShaderProgram m_shader;
 
 
-	GameObject m_bunny;
-	aie::OBJMesh  m_bunnyMesh;
-	glm::mat4 m_bunnyTransform;
+	GameObject m_soulSpear;
+
 
 	Mesh m_quadMesh;
 	glm::mat4 m_quadTransform;

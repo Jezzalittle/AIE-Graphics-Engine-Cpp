@@ -5,3 +5,8 @@ x64/
 Debug/
 
 
+bin/stanford/soulspear.mtl
+bin/stanford/soulspear_diffuse.tga
+bin/stanford/soulspear.obj
+bin/stanford/soulspear_specular.tga
+bin/stanford/soulspear_normal.tga

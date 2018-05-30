@@ -23,6 +23,10 @@ public:
 
 private:
 
+	void enableAttrib(int pos, int amount, int offset);
+	void initialiseBuffer(Vertex* vert);
+	void cleanUpBuffer();
+
 	unsigned int triCount;
 	unsigned int vao, vbo, ibo;
 

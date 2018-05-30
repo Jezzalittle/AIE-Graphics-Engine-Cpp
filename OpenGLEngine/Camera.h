@@ -79,7 +79,7 @@ public:
 		return m_worldTransform[3];
 	}
 
-	virtual void update(struct GLFWwindow* window, float dt) = 0;
+	virtual void update(class GLFWwindow* window, float dt) = 0;
 
 	glm::vec4& m_forward = m_worldTransform[2];
 	glm::vec4& m_right = m_worldTransform[0];
