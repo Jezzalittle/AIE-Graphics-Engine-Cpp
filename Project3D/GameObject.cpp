@@ -47,7 +47,7 @@ void GameObject::bindTransform(aie::ShaderProgram * a_shader, Camera* a_cam)
 void GameObject::loadMesh(const char * a_path)
 {
 
-	if (m_mesh->load(a_path) == false)
+	if (m_mesh->load(a_path, true, true) == false)
 	{
 		printf(a_path);
 	}
