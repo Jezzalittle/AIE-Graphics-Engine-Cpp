@@ -17,7 +17,7 @@ public:
 	virtual void onShutdown() = 0;
 	int run(const char* a_windowName, int a_width, int a_height);
 
-
+	float getElapsedTime() { return m_elapsedTime; }
 	float getDeltaTime() { return m_dt; }
 	int getWindowWidth() { return m_width; }
 	int getWindowHeight() { return m_height; }

@@ -9,12 +9,23 @@ int Application3D::onStartup()
 
 	m_soulSpear = GameObject("./stanford/soulspear.obj", 
 								{ 0.5f, 0, 0, 0,
-								 0, 0.5f, 0, 0,
-								 0, 0, 0.5f, 0,
-								 0, 0, 0, 1 },
-								 "./stanford/soulspear_diffuse.tga");
+								0, 0.5f, 0, 0,
+								0, 0, 0.5f, 0,
+								0, 0, 0, 1 },
+								"./stanford/soulspear_diffuse.tga",
+								"./shaders/simpleTexture.vert",
+								"./shaders/simpleTexture.frag",
+								m_cam);
 
-	setBackgroundColour(0, 0, 0);
+	m_light = new Light();
+
+	m_light->diffuse = { 1, 1, 0 };
+	m_light->specular = { 1, 1, 0 };
+	m_ambientLight = { 0.25f, 0.25f, 0.25f };
+
+	m_soulSpear.setLight(m_light);
+
+	setBackgroundColour(0.5f, 0.5f, 0.5f);
 	// initialise gizmo primitive counts
 	aie::Gizmos::create(10000, 10000, 10000, 10000);
 
@@ -23,16 +34,9 @@ int Application3D::onStartup()
 	m_cam->setProjectionMatrix(glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f));
 
 
-	m_shader.loadShader(aie::eShaderStage::VERTEX,
-		"./shaders/simple.vert");
-	m_shader.loadShader(aie::eShaderStage::FRAGMENT,
-		"./shaders/simple.frag");
 
-	if (m_shader.link() == false)
-	{
-		printf("Shader Error: %s\n", m_shader.getLastError());
-		return false;
-	}
+
+
 
 	m_quadMesh.initialiseQuad();
 
@@ -56,6 +60,12 @@ void Application3D::onShutdown()
 
 void Application3D::update()
 {
+	// query time since application started
+	float time = getElapsedTime();
+	// rotate light
+	m_light->direction = glm::normalize(glm::vec3(glm::cos(time * 2),
+		glm::sin(time * 2), 0));
+
 	m_cam->update(getWindow(), getDeltaTime());
 }
 
@@ -64,21 +74,15 @@ void Application3D::draw()
 	// wipe the screen to the background colour
 	clearScreen();
 
-	// bind shader
-	m_shader.bind();
-
-	m_soulSpear.bindTransform(&m_shader, m_cam);
-
-
 	//draw bunny
 	m_soulSpear.draw();
 
 	// bind transform
-	auto pvm = m_cam->getProjectionView() * m_quadTransform;
-	m_shader.bindUniform("ProjectionViewModel", pvm);
+	//auto pvm = m_cam->getProjectionView() * m_quadTransform;
+	//m_shader.bindUniform("ProjectionViewModel", pvm);
 	
 	// draw quad
-	m_quadMesh.draw();
+	//m_quadMesh.draw();
 
 
 	aie::Gizmos::addTransform(glm::mat4(1));
@@ -104,4 +108,5 @@ void Application3D::draw()
 
 Application3D::~Application3D()
 {
+	delete(m_light);
 }

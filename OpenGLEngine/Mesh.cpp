@@ -16,15 +16,24 @@ void Mesh::initialiseQuad()
 	vertices[4].position = { 0.5f, 0, 0.5f, 1 };
 	vertices[5].position = { 0.5f, 0, -0.5f, 1 };
 
-	vertices[0].texCoord = { 0, 1 }; // bottom left
-	vertices[1].texCoord = { 1, 1 }; // bottom right
-	vertices[2].texCoord = { 0, 0 }; // top left
-	vertices[3].texCoord = { 0, 0 }; // top left
-	vertices[4].texCoord = { 1, 1 }; // bottom right
-	vertices[5].texCoord = { 1, 0 }; // top right
+	vertices[0].normal = { 0, 1, 0, 0 };
+	vertices[1].normal = { 0, 1, 0, 0 };
+	vertices[2].normal = { 0, 1, 0, 0 };
+	vertices[3].normal = { 0, 1, 0, 0 };
+	vertices[4].normal = { 0, 1, 0, 0 };
+	vertices[5].normal = { 0, 1, 0, 0 };
+
+	vertices[0].texCoord = { 0, 1 };
+	vertices[1].texCoord = { 1, 1 };
+	vertices[2].texCoord = { 0, 0 };
+	vertices[3].texCoord = { 0, 0 };
+	vertices[4].texCoord = { 1, 1 };
+	vertices[5].texCoord = { 1, 0 };
+
 	initialiseBuffer(vertices);
 
 	enableAttrib(0, 4, 0);
+	enableAttrib(1, 4, 16);
 	enableAttrib(2, 2, 32);
 	
 	cleanUpBuffer();
@@ -49,8 +58,9 @@ void Mesh::draw()
 
 void Mesh::enableAttrib(int pos, int amount, int offset)
 {
+	
 	glEnableVertexAttribArray(pos);
-	glVertexAttribPointer(pos, amount, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)32);
+	glVertexAttribPointer(pos, amount, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offset);
 
 }
 

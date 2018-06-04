@@ -20,7 +20,12 @@ public:
 
 	virtual ~Application3D();
 
+
 protected:
+
+
+	glm::vec3 m_ambientLight;
+	Light* m_light;
 
 	FPSCamera* m_cam;
 	glm::mat4 m_viewMatrix;
@@ -35,3 +40,11 @@ protected:
 	glm::mat4 m_quadTransform;
 };
 
+	struct Light
+	{
+		Light() { direction = glm::vec3(); diffuse = glm::vec3(); specular = glm::vec3(); }
+		glm::vec3 direction;
+		glm::vec3 diffuse;
+		glm::vec3 specular;
+
+	};

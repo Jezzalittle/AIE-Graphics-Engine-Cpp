@@ -1,13 +1,11 @@
 // a simple flat colour shader
 #version 410
 
-in vec2 vTexCoord;
-
-uniform sampler2D diffuseTexture;
+in vec4 vColour;
 
 out vec4 FragColour;
 
 void main()
 {
-	FragColour = texture( diffuseTexture, vTexCoord);
+	FragColour = vec4(1, 0, 1, 1);
 }
