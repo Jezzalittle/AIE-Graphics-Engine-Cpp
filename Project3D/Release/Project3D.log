@@ -1,4 +1,32 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(377,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   Application3D.cpp
-c:\users\s170895\desktop\graphics engine\opengl engine\openglengine\application.h(21): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-LINK : fatal error LNK1181: cannot open input file 'OpenGLEngine.lib'
+  GameObject.cpp
+  main.cpp
+Application3D.obj : error LNK2001: unresolved external symbol "public: static void __cdecl aie::Gizmos::addTransform(struct glm::mat<4,4,float,0> const &,float)" (?addTransform@Gizmos@aie@@SAXABU?$mat@$03$03M$0A@@glm@@M@Z)
+Application3D.obj : error LNK2001: unresolved external symbol "public: static void __cdecl aie::Gizmos::addLine(struct glm::vec<3,float,0> const &,struct glm::vec<3,float,0> const &,struct glm::vec<4,float,0> const &)" (?addLine@Gizmos@aie@@SAXABU?$vec@$02M$0A@@glm@@0ABU?$vec@$03M$0A@@4@@Z)
+Application3D.obj : error LNK2001: unresolved external symbol "public: static void __cdecl aie::Gizmos::draw2D(float,float)" (?draw2D@Gizmos@aie@@SAXMM@Z)
+Application3D.obj : error LNK2001: unresolved external symbol "public: static void __cdecl aie::Gizmos::draw(struct glm::mat<4,4,float,0> const &)" (?draw@Gizmos@aie@@SAXABU?$mat@$03$03M$0A@@glm@@@Z)
+Application3D.obj : error LNK2001: unresolved external symbol "public: static void __cdecl aie::Gizmos::create(unsigned int,unsigned int,unsigned int,unsigned int)" (?create@Gizmos@aie@@SAXIIII@Z)
+Application3D.obj : error LNK2001: unresolved external symbol "public: __thiscall aie::ShaderProgram::~ShaderProgram(void)" (??1ShaderProgram@aie@@QAE@XZ)
+Application3D.obj : error LNK2001: unresolved external symbol "public: void __thiscall Mesh::initialiseQuad(void)" (?initialiseQuad@Mesh@@QAEXXZ)
+Application3D.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall Mesh::~Mesh(void)" (??1Mesh@@UAE@XZ)
+Application3D.obj : error LNK2001: unresolved external symbol "public: __thiscall FPSCamera::FPSCamera(float,float)" (??0FPSCamera@@QAE@MM@Z)
+Application3D.obj : error LNK2001: unresolved external symbol "protected: void __thiscall Application::clearScreen(void)" (?clearScreen@Application@@IAEXXZ)
+Application3D.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall Application::~Application(void)" (??1Application@@UAE@XZ)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::Texture::load(char const *)" (?load@Texture@aie@@QAE_NPBD@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall aie::Texture::~Texture(void)" (??1Texture@aie@@UAE@XZ)
+GameObject.obj : error LNK2001: unresolved external symbol "public: __thiscall aie::Texture::Texture(void)" (??0Texture@aie@@QAE@XZ)
+GameObject.obj : error LNK2001: unresolved external symbol "public: void __thiscall aie::OBJMesh::draw(bool)" (?draw@OBJMesh@aie@@QAEX_N@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::OBJMesh::load(char const *,bool,bool)" (?load@OBJMesh@aie@@QAE_NPBD_N1@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: __thiscall aie::OBJMesh::~OBJMesh(void)" (??1OBJMesh@aie@@QAE@XZ)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::ShaderProgram::bindUniform(char const *,struct glm::vec<3,float,0> const &)" (?bindUniform@ShaderProgram@aie@@QAE_NPBDABU?$vec@$02M$0A@@glm@@@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::ShaderProgram::bindUniform(char const *,struct glm::vec<4,float,0> const &)" (?bindUniform@ShaderProgram@aie@@QAE_NPBDABU?$vec@$03M$0A@@glm@@@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::ShaderProgram::bindUniform(char const *,struct glm::mat<3,3,float,0> const &)" (?bindUniform@ShaderProgram@aie@@QAE_NPBDABU?$mat@$02$02M$0A@@glm@@@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::ShaderProgram::bindUniform(char const *,struct glm::mat<4,4,float,0> const &)" (?bindUniform@ShaderProgram@aie@@QAE_NPBDABU?$mat@$03$03M$0A@@glm@@@Z)
+GameObject.obj : error LNK2001: unresolved external symbol "public: void __thiscall aie::ShaderProgram::bind(void)" (?bind@ShaderProgram@aie@@QAEXXZ)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::ShaderProgram::link(void)" (?link@ShaderProgram@aie@@QAE_NXZ)
+GameObject.obj : error LNK2001: unresolved external symbol "public: bool __thiscall aie::ShaderProgram::loadShader(unsigned int,char const *)" (?loadShader@ShaderProgram@aie@@QAE_NIPBD@Z)
+main.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall Mesh::draw(void)" (?draw@Mesh@@UAEXXZ)
+main.obj : error LNK2001: unresolved external symbol "public: int __thiscall Application::run(char const *,int,int)" (?run@Application@@QAEHPBDHH@Z)
+main.obj : error LNK2001: unresolved external symbol "public: __thiscall Application::Application(void)" (??0Application@@QAE@XZ)
+C:\Users\s170895\Desktop\Graphics Engine\opengl Engine\build\Release\Win32\Project3D.exe : fatal error LNK1120: 27 unresolved externals

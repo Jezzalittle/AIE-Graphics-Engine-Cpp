@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <Mesh.h>
 #include <vector>
+#include <RenderTarget.h>
 
 class ShaderProgram;
 class Camera;
@@ -80,9 +81,8 @@ private:
 	Camera* m_cam;
 	aie::ShaderProgram m_shader;
 	aie::Texture* m_textureDiff;
-	aie::Texture* m_textureSpec;
-	aie::Texture* m_textureNormal;
 
+	
 
 	const char* m_texturePath;
 	const char* m_meshPath;

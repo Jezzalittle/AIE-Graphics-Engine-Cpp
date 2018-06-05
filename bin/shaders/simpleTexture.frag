@@ -1,4 +1,5 @@
 // a simple flat colour shader
+#version 410
 
 in vec2 vTexCoord;
 in vec3 vNormal;

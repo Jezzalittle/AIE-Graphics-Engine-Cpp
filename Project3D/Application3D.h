@@ -21,6 +21,8 @@ public:
 	virtual ~Application3D();
 
 
+
+
 protected:
 
 
@@ -33,11 +35,18 @@ protected:
 	aie::ShaderProgram m_shader;
 
 
-	GameObject m_soulSpear;
+
+	GameObject* m_soulSpear;
 
 
 	Mesh m_quadMesh;
 	glm::mat4 m_quadTransform;
+	
+private:
+
+	float m_lightRotTimer;
+
+
 };
 
 	struct Light

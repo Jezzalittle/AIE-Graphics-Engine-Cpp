@@ -10,6 +10,9 @@ GameObject::GameObject()
 
 GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char * a_texturePath, const char* a_vertPath, const char* a_fragPath, Camera* a_cam)
 {
+
+	m_transform = a_trasform;
+
 	m_cam = a_cam;
 
 	m_shader = aie::ShaderProgram();
@@ -31,14 +34,14 @@ GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char
 
 	
 
-	if (m_shader.link() == false)
-	{
-		printf("Shader Error: %s\n", m_shader.getLastError());
-	}
-
 	if (m_meshPath != "")
 	{
 		loadMesh(m_meshPath);
+	}
+
+	if (m_shader.link() == false)
+	{
+		printf("Shader Error: %s\n", m_shader.getLastError());
 	}
 
 }
@@ -46,7 +49,11 @@ GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char
 
 void GameObject::bindShader()
 {
+	// bind shader
+	m_shader.bind();
+
 	assert(m_cam != nullptr);
+
 	glm::mat4 pvm = m_cam->getProjectionView() * m_transform;
 	m_shader.bindUniform("ProjectionViewModel", pvm);
 
@@ -58,10 +65,10 @@ void GameObject::bindShader()
 	if (m_light != nullptr)
 	{
 
-		m_shader.bindUniform("Ia", { 0.25f,0.25f,0.25f });
+		m_shader.bindUniform("Ia", { 0.25f, 0.25f, 0.25f });
 		m_shader.bindUniform("Id", m_light->diffuse);
 		m_shader.bindUniform("Is", m_light->specular);
-		m_shader.bindUniform("lightDirection", m_light->direction);
+		m_shader.bindUniform("LightDirection", m_light->direction);
 
 		m_shader.bindUniform("cameraPosition", m_cam->getPosition());
 	}
@@ -90,13 +97,8 @@ void GameObject::loadTexture(const char * a_path)
 
 void GameObject::draw()
 {
-
-
 	//binding shader values
 	bindShader();
-
-	// bind shader
-	m_shader.bind();
 
 	if (m_mesh != nullptr)
 	{

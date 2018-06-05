@@ -7,25 +7,25 @@ int Application3D::onStartup()
 {
 	m_cam = new FPSCamera(5, 5);
 
-	m_soulSpear = GameObject("./stanford/soulspear.obj", 
-								{ 0.5f, 0, 0, 0,
-								0, 0.5f, 0, 0,
-								0, 0, 0.5f, 0,
-								0, 0, 0, 1 },
+	m_soulSpear = new GameObject("./stanford/soulspear.obj", 
+								{ 1, 0, 0, 0,
+								  0, 1, 0, 0,
+								  0, 0, 1, 0,
+								  0, 0, 0, 1 },
 								"./stanford/soulspear_diffuse.tga",
-								"./shaders/simpleTexture.vert",
-								"./shaders/simpleTexture.frag",
+								"./shaders/phong.vert",
+								"./shaders/phong.frag",
 								m_cam);
 
 	m_light = new Light();
-
-	m_light->diffuse = { 1, 1, 0 };
+	m_light->direction = { -1,-1,-1 };
+	m_light->diffuse = { 1, 1, 0.8f };
 	m_light->specular = { 1, 1, 0 };
 	m_ambientLight = { 0.25f, 0.25f, 0.25f };
 
-	m_soulSpear.setLight(m_light);
+	m_soulSpear->setLight(m_light);
 
-	setBackgroundColour(0.5f, 0.5f, 0.5f);
+	setBackgroundColour(0, 0, 0);
 	// initialise gizmo primitive counts
 	aie::Gizmos::create(10000, 10000, 10000, 10000);
 
@@ -33,7 +33,7 @@ int Application3D::onStartup()
 	m_cam->setViewMatrix(glm::lookAt(glm::vec3(10), glm::vec3(0), glm::vec3(0, 1, 0)));
 	m_cam->setProjectionMatrix(glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f));
 
-
+	m_lightRotTimer = 0.0f;
 
 
 
@@ -60,11 +60,10 @@ void Application3D::onShutdown()
 
 void Application3D::update()
 {
-	// query time since application started
-	float time = getElapsedTime();
+
+	m_lightRotTimer += getDeltaTime();
 	// rotate light
-	m_light->direction = glm::normalize(glm::vec3(glm::cos(time * 2),
-		glm::sin(time * 2), 0));
+	m_light->direction = glm::normalize(glm::vec3(glm::cos(m_lightRotTimer), glm::sin(m_lightRotTimer), 0));
 
 	m_cam->update(getWindow(), getDeltaTime());
 }
@@ -75,11 +74,12 @@ void Application3D::draw()
 	clearScreen();
 
 	//draw bunny
-	m_soulSpear.draw();
 
 	// bind transform
 	//auto pvm = m_cam->getProjectionView() * m_quadTransform;
 	//m_shader.bindUniform("ProjectionViewModel", pvm);
+	
+	m_soulSpear->draw();
 	
 	// draw quad
 	//m_quadMesh.draw();
