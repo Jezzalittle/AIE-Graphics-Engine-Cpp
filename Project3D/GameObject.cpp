@@ -27,12 +27,12 @@ GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char
 	m_meshPath = a_meshPath;
 
 	m_mesh = new aie::OBJMesh();
-	
+
 
 	m_shader.loadShader(aie::eShaderStage::VERTEX, a_vertPath);
 	m_shader.loadShader(aie::eShaderStage::FRAGMENT, a_fragPath);
 
-	
+
 
 	if (m_meshPath != "")
 	{
@@ -62,16 +62,20 @@ void GameObject::bindShader()
 	m_shader.bindUniform("ModelMatrix", m_transform);
 
 
-	if (m_light != nullptr)
+	for (size_t i = 0; i < m_lights.size(); i++)
 	{
-
-		m_shader.bindUniform("Ia", { 0.25f, 0.25f, 0.25f });
-		m_shader.bindUniform("Id", m_light->diffuse);
-		m_shader.bindUniform("Is", m_light->specular);
-		m_shader.bindUniform("LightDirection", m_light->direction);
-
-		m_shader.bindUniform("cameraPosition", m_cam->getPosition());
+		m_shader.bindUniform(("lights[" + std::to_string(i) + "].m_direction").c_str(), m_lights[i]->direction);
+		m_shader.bindUniform(("lights[" + std::to_string(i) + "].m_ambient").c_str(), m_lights[i]->ambientLight);
+		m_shader.bindUniform(("lights[" + std::to_string(i) + "].m_diffuse").c_str(), m_lights[i]->diffuse);
+		m_shader.bindUniform(("lights[" + std::to_string(i) + "].m_specular").c_str(), m_lights[i]->specular);
 	}
+
+	m_shader.bindUniform("HasTextures", 1);
+
+
+
+	m_shader.bindUniform("cameraPosition", m_cam->getPosition());
+
 
 
 
@@ -80,7 +84,7 @@ void GameObject::bindShader()
 
 void GameObject::loadMesh(const char * a_path)
 {
-	
+
 	if (m_mesh->load(a_path, true, true) == false)
 	{
 		printf(a_path);

@@ -58,7 +58,7 @@ public:
 	void setTrasform(glm::mat4 a_trasform) { m_transform = a_trasform; }
 	glm::mat4 getTrasform() { return m_transform; }
 
-	void setLight(Light* a_light) { m_light = a_light; }
+	void setLight(Light* a_light) { m_lights.push_back(a_light); }
 
 	void loadMesh(const char* a_path);
 	void loadTexture(const char* a_path);
@@ -76,7 +76,7 @@ private:
 	
 	void bindShader();
 
-	Light* m_light;
+	std::vector<Light*> m_lights;
 
 	Camera* m_cam;
 	aie::ShaderProgram m_shader;

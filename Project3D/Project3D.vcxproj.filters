@@ -33,4 +33,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bin\shaders\phong.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\phong.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

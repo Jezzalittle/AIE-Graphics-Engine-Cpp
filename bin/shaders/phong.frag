@@ -6,17 +6,18 @@
  in vec3 vBiTangent;
  in vec2 vTexCoord; 
   
-  // ambient light colour 
- uniform vec3 Ia;
- 
- // diffuse light colour
- uniform vec3 Id; 
- 
-  // specular light colour 
- uniform vec3 Is; 
 
- uniform vec3 LightDirection;
- 
+
+struct Light
+{
+	vec3 m_direction;
+	vec3 m_ambient;
+	vec3 m_diffuse;
+	vec3 m_specular;	
+};
+#define NR_LIGHTS 2
+uniform Light lights[NR_LIGHTS];
+uniform int  HasTextures;
 
  
   // ambient material colour
@@ -37,40 +38,83 @@
 
   out vec4 FragColour; 
  
+
+vec3 CalcDirLight(Light light, vec3 a_normalNormalised, vec3 a_viewVector)
+{
+	vec3 lightDir = normalize(light.m_direction);
+	
+	float lambertTerm;
+	vec3 diffuse; 
+	vec3 ambient; 
+	vec3 specular;
+	float specularTerm;
+	vec3 reflectionVector;
+	vec3 texDiffuse; 
+	vec3 texSpecular;
+	
+	if(HasTextures == 1)//Has textures
+	{
+		lambertTerm = max( 0, min( 1, dot( a_normalNormalised, lightDir)));	
+	
+		texDiffuse = texture( diffuseTexture, vTexCoord ).rgb;
+		texSpecular = texture( specularTexture, vTexCoord ).rgb;
+
+		reflectionVector = reflect( lightDir, a_normalNormalised);
+	
+		specularTerm = pow(max(0, dot(reflectionVector, a_viewVector)), specularPower);
+	
+		diffuse = light.m_diffuse * Kd * texDiffuse * lambertTerm;
+		ambient = light.m_ambient * Ka;
+		specular = light.m_specular * Ks * texSpecular * specularTerm;
+	}
+	
+	
+	else//Has no textures
+	{
+		lambertTerm = max( 0, min( 1, dot( a_normalNormalised, lightDir)));	
+
+		reflectionVector = reflect( lightDir, a_normalNormalised);
+	
+		specularTerm = pow(max(0, dot(reflectionVector, a_viewVector)), specularPower);
+	
+		diffuse = light.m_diffuse * Kd * lambertTerm;
+		ambient = light.m_ambient * Ka;
+		specular = light.m_specular * Ks * specularTerm;
+	}
+	return(diffuse + ambient + specular);
+}
+
+
+
   void main() 
   {     
-  // ensure normal and light direction are normalised  
-  vec3 N = normalize(vNormal);  
-  vec3 T = normalize(vTangent); 
-  vec3 B = normalize(vBiTangent); 
-  vec3 L = normalize(LightDirection);
-  
-  mat3 TBN = mat3(T,B,N);       
-  // calculate lambert term (negate light direction)  
-  
-  float lambertTerm = max( 0, min( 1, dot( N, -L ) ) );  
-  
-   // output lambert as grayscale   
-   //FragColour = vec4( lambertTerm, lambertTerm, lambertTerm, 1 );  
-   vec3 texDiffuse = texture(diffuseTexture, vTexCoord).rgb;  
-   vec3 texSpecular = texture(specularTexture, vTexCoord).rgb; 
-   vec3 texNormal = texture( normalTexture, vTexCoord ).rgb;   
-   
-   N = TBN * (texNormal * 2 - 1);    
-   
-   // calculate view vector and reflection vector   
-   vec3 V = normalize(cameraPosition - vPosition.xyz);  
-   vec3 R = reflect( L, N );   
-   
-   // calculate specular term   
-   float specularTerm = pow( max( 0, dot( R, V ) ), specularPower );  
-   
-   // calculate each colour prop.    
-   vec3 ambient = Ia * Ka;    
-   vec3 diffuse = Id * Kd * texDiffuse * lambertTerm;  
-   vec3 specular = Is * Ks * texSpecular * specularTerm;   
-   
-   // output final colour    
-   FragColour = vec4( ambient + diffuse + specular, 1 ); 
+	  // ensure normal and light direction are normalised  
+	  vec3 N = normalize(vNormal);  
+	  vec3 T = normalize(vTangent); 
+	  vec3 B = normalize(vBiTangent); 
+	  
+	  mat3 TBN = mat3(T,B,N);       
+	  
+
+	  vec3 texNormal = texture( normalTexture, vTexCoord ).rgb;   
+	  
+	  if(HasTextures == 1)
+	  {
+		N = TBN * (texNormal * 2 - 1);    
+	  }
+
+	   
+	  // calculate view vector and reflection vector   
+	  vec3 V = normalize(cameraPosition - vPosition.xyz);  
+	   
+	  vec3 result = vec3(0,0,0);
+	  
+	  for(int i = 0; i < NR_LIGHTS; i++)
+	  {
+		 result += CalcDirLight(lights[i], N, V);
+	  }
+ 	   
+	   // output final colour    
+	   FragColour = vec4(result,1); //FragColour = vec4( ambient + diffuse + specular, 1 ); 
    
    }

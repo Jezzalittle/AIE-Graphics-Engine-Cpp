@@ -28,11 +28,12 @@ protected:
 
 	glm::vec3 m_ambientLight;
 	Light* m_light;
+	Light* m_light2;
+
 
 	FPSCamera* m_cam;
 	glm::mat4 m_viewMatrix;
 	glm::mat4 m_projectionMatrix;
-	aie::ShaderProgram m_shader;
 
 
 
@@ -51,9 +52,9 @@ private:
 
 	struct Light
 	{
-		Light() { direction = glm::vec3(); diffuse = glm::vec3(); specular = glm::vec3(); }
+		Light() { direction = glm::vec3(); diffuse = glm::vec3(); specular = glm::vec3(); ambientLight = glm::vec3(); }
 		glm::vec3 direction;
 		glm::vec3 diffuse;
 		glm::vec3 specular;
-
+		glm::vec3 ambientLight;
 	};

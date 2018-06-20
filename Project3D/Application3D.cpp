@@ -5,7 +5,7 @@
 
 int Application3D::onStartup()
 {
-	m_cam = new FPSCamera(5, 5);
+	m_cam = new FPSCamera(10, 5);
 
 	m_soulSpear = new GameObject("./stanford/soulspear.obj", 
 								{ 1, 0, 0, 0,
@@ -17,13 +17,23 @@ int Application3D::onStartup()
 								"./shaders/phong.frag",
 								m_cam);
 
+	
+
 	m_light = new Light();
 	m_light->direction = { -1,-1,-1 };
-	m_light->diffuse = { 1, 1, 0.8f };
+	m_light->diffuse = { 0, 1, 0 };
 	m_light->specular = { 1, 1, 0 };
-	m_ambientLight = { 0.25f, 0.25f, 0.25f };
+	m_light->ambientLight = { 0.25f, 0.25f, 0.25f };
+
+	m_light2 = new Light();
+	m_light2->direction = { -1,-1,-1 };
+	m_light2->diffuse = { 0.8f, 0, 0.8f };
+	m_light2->specular = { 1, 1, 0 };
+	m_light2->ambientLight = { 0.25f, 0.25f, 0.25f };
 
 	m_soulSpear->setLight(m_light);
+	m_soulSpear->setLight(m_light2);
+
 
 	setBackgroundColour(0, 0, 0);
 	// initialise gizmo primitive counts
@@ -64,6 +74,8 @@ void Application3D::update()
 	m_lightRotTimer += getDeltaTime();
 	// rotate light
 	m_light->direction = glm::normalize(glm::vec3(glm::cos(m_lightRotTimer), glm::sin(m_lightRotTimer), 0));
+
+	m_light2->direction = glm::normalize(glm::vec3(-glm::cos(m_lightRotTimer), -glm::sin(m_lightRotTimer), 0));
 
 	m_cam->update(getWindow(), getDeltaTime());
 }
@@ -109,4 +121,6 @@ void Application3D::draw()
 Application3D::~Application3D()
 {
 	delete(m_light);
+	delete(m_light2);
+	delete(m_soulSpear);
 }
