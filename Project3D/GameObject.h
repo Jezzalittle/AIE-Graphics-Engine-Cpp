@@ -18,17 +18,13 @@ class GameObject
 public:
 	GameObject(); 
 	GameObject(glm::mat4 a_trasform) { m_transform = a_trasform; };
-	GameObject(const char* a_meshPath, glm::mat4 a_trasform, const char* a_texturePath, const char* a_vertPath, const char* a_fragPath, Camera* a_cam);
+	GameObject(const char* a_meshPath, glm::mat4 a_trasform, const char* a_vertPath, const char* a_fragPath, Camera* a_cam);
 	GameObject(GameObject&& other)
 	{
-		m_textureDiff = std::move(other.m_textureDiff);
-		other.m_textureDiff = nullptr;
-
 
 		m_mesh = std::move(other.m_mesh);
 		other.m_mesh = nullptr;
 
-		m_texturePath = other.m_texturePath;
 		m_meshPath = other.m_meshPath;
 		m_transform = other.m_transform;
 	}
@@ -36,8 +32,6 @@ public:
 	// Move Constructor
 	GameObject& operator= (GameObject&& other)
 	{
-		m_textureDiff = std::move(other.m_textureDiff);
-		other.m_textureDiff = nullptr;
 
 		m_cam = std::move(other.m_cam);
 		other.m_cam = nullptr;
@@ -46,7 +40,6 @@ public:
 		other.m_mesh = nullptr;
 
 		m_shader = other.m_shader;
-		m_texturePath = other.m_texturePath;
 		m_meshPath = other.m_meshPath;
 		m_transform = other.m_transform;
 
@@ -80,11 +73,8 @@ private:
 
 	Camera* m_cam;
 	aie::ShaderProgram m_shader;
-	aie::Texture* m_textureDiff;
 
 	
-
-	const char* m_texturePath;
 	const char* m_meshPath;
 	glm::mat4 m_transform;
 	aie::OBJMesh* m_mesh;

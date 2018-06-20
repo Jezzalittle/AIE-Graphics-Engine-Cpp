@@ -36,7 +36,7 @@ protected:
 	glm::mat4 m_projectionMatrix;
 
 
-
+	GameObject* m_driver;
 	GameObject* m_soulSpear;
 
 
@@ -46,6 +46,7 @@ protected:
 private:
 
 	float m_lightRotTimer;
+	float m_lightRotTimer2;
 
 
 };

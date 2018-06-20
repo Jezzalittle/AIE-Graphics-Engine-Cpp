@@ -41,6 +41,8 @@ void FPSCamera::update(struct GLFWwindow* window, float dt)
 		translate(-wUp * dt * m_moveSpeed);
 	}
 
+
+
 	lookAt(glm::vec3());
 
 }

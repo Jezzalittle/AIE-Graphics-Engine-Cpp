@@ -8,7 +8,7 @@ GameObject::GameObject()
 {
 }
 
-GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char * a_texturePath, const char* a_vertPath, const char* a_fragPath, Camera* a_cam)
+GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char* a_vertPath, const char* a_fragPath, Camera* a_cam)
 {
 
 	m_transform = a_trasform;
@@ -17,12 +17,6 @@ GameObject::GameObject(const char * a_meshPath, glm::mat4 a_trasform, const char
 
 	m_shader = aie::ShaderProgram();
 
-	m_texturePath = a_texturePath;
-	m_textureDiff = new aie::Texture();
-	if (m_texturePath != "")
-	{
-		loadTexture(m_texturePath);
-	}
 
 	m_meshPath = a_meshPath;
 
@@ -91,13 +85,7 @@ void GameObject::loadMesh(const char * a_path)
 	}
 }
 
-void GameObject::loadTexture(const char * a_path)
-{
-	if (m_textureDiff->load(a_path) == false)
-	{
-		printf(a_path);
-	}
-}
+
 
 void GameObject::draw()
 {
