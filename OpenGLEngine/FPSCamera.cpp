@@ -40,10 +40,13 @@ void FPSCamera::update(struct GLFWwindow* window, float dt)
 	{
 		translate(-wUp * dt * m_moveSpeed);
 	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		lookAt({ 0,getPosition().y,0 });
+	}
 
 
 
-	lookAt(glm::vec3());
 
 }
 

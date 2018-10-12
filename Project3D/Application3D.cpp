@@ -7,48 +7,34 @@ int Application3D::onStartup()
 {
 	m_cam = new FPSCamera(10, 5);
 
-	m_soulSpear = new GameObject("./Driver/Driver.obj", 
+	m_soulSpear = new GameObject("./soulspear/soulspear.obj", 
 								{ 1, 0, 0, 0,
 								  0, 1, 0, 0,
 								  0, 0, 1, 0,
-								  3, 0, 0, 1 },
-								"./shaders/phong.vert",
-								"./shaders/phong.frag",
+								  0, 0, 0, 1 },
+								"./shaders/PBR.vert",
+								"./shaders/PBR.frag",
 								m_cam);
 
-	m_driver = new GameObject("./stanford/soulspear.obj",
-		{ 1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1 },
-		"./shaders/phong.vert",
-		"./shaders/phong.frag",
-		m_cam);
 
 	m_light = new Light();
-	m_light->direction = { -1,-1,-1 };
-	m_light->diffuse = { 0, 1, 0 };
-	m_light->specular = { 1, 1, 0 };
-	m_light->ambientLight = { 0.25f, 0.25f, 0.25f };
+	m_light->direction = { 0, 0, -1};
+	m_light->diffuse = { 0.5f, 0.5f, 0.5f };
+	m_light->specular = { 0.5f, 0.5f, 0.5f };
+	m_light->ambientLight = { 0, 0, 0 };
 
-	m_light2 = new Light();
-	m_light2->direction = { -1,-1,-1 };
-	m_light2->diffuse = { 0.8f, 0, 0.8f };
-	m_light2->specular = { 1, 1, 0 };
-	m_light2->ambientLight = { 0.25f, 0.25f, 0.25f };
+
 
 	m_soulSpear->setLight(m_light);
-	m_soulSpear->setLight(m_light2);
+	//m_soulSpear->setLight(m_light2);
 
-	m_driver->setLight(m_light);
-	m_driver->setLight(m_light2);
 
 	setBackgroundColour(0.5f, 0.5, 0.5f);
 	// initialise gizmo primitive counts
 	aie::Gizmos::create(10000, 10000, 10000, 10000);
 
 	// create simple camera transforms
-	m_cam->setViewMatrix(glm::lookAt(glm::vec3(10), glm::vec3(0), glm::vec3(0, 1, 0)));
+	m_cam->setViewMatrix(glm::lookAt(glm::vec3(10,0,10), glm::vec3(0,0,1), glm::vec3(0, 1, 0)));
 	m_cam->setProjectionMatrix(glm::perspective(glm::pi<float>() * 0.25f, getWindowWidth() / (float)getWindowHeight(), 0.1f, 1000.f));
 
 	m_lightRotTimer = 0.0f;
@@ -81,10 +67,9 @@ void Application3D::update()
 	m_lightRotTimer2 += getDeltaTime() * 0.5;
 	m_lightRotTimer += getDeltaTime();
 	// rotate light
-	m_light->direction = glm::normalize(glm::vec3(glm::cos(m_lightRotTimer), glm::sin(m_lightRotTimer), 0));
+	//m_light->direction = glm::normalize(glm::vec3(glm::cos(m_lightRotTimer), glm::sin(m_lightRotTimer), 0));
 
-	m_light2->direction = glm::normalize(glm::vec3(-glm::cos(m_lightRotTimer2), -glm::sin(m_lightRotTimer2), 0));
-
+//	m_light2->direction = glm::normalize(glm::vec3(-glm::cos(m_lightRotTimer2), -glm::sin(m_lightRotTimer2), 0));
 	m_cam->update(getWindow(), getDeltaTime());
 }
 
@@ -99,7 +84,6 @@ void Application3D::draw()
 	//auto pvm = m_cam->getProjectionView() * m_quadTransform;
 	//m_shader.bindUniform("ProjectionViewModel", pvm);
 	
-	m_driver->draw();
 
 	m_soulSpear->draw();
 	
@@ -107,16 +91,16 @@ void Application3D::draw()
 	//m_quadMesh.draw();
 
 
-	aie::Gizmos::addTransform(glm::mat4(1));
+	//aie::Gizmos::addTransform(glm::mat4(1));
 
-	glm::vec4 white(1);
-	glm::vec4 black(0, 0, 0, 1);
-	for (int i = 0; i < 21; ++i)
-	{
-		aie::Gizmos::addLine(glm::vec3(-10 + i, 0, 10), glm::vec3(-10 + i, 0, -10), i == 10 ? white : black);
+	//glm::vec4 white(1);
+	//glm::vec4 black(0, 0, 0, 1);
+	//for (int i = 0; i < 21; ++i)
+	//{
+	//	aie::Gizmos::addLine(glm::vec3(-10 + i, 0, 10), glm::vec3(-10 + i, 0, -10), i == 10 ? white : black);
 
-		aie::Gizmos::addLine(glm::vec3(10, 0, -10 + i), glm::vec3(-10, 0, -10 + i), i == 10 ? white : black);
-	}
+	//	aie::Gizmos::addLine(glm::vec3(10, 0, -10 + i), glm::vec3(-10, 0, -10 + i), i == 10 ? white : black);
+	//}
 
 
 	// draw 3D gizmos

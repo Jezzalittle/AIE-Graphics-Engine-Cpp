@@ -40,5 +40,11 @@
     <None Include="..\bin\shaders\phong.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\bin\shaders\PBR.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBR.vert">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
