@@ -7,6 +7,7 @@ FPSCamera::FPSCamera(float a_speed, float a_rotspeed)
 {
 	m_moveSpeed = a_speed;
 	m_roatateSpeed = a_rotspeed;
+	m_mousePostion = glm::vec2();
 }
 
 void FPSCamera::update(struct GLFWwindow* window, float dt)
@@ -15,6 +16,8 @@ void FPSCamera::update(struct GLFWwindow* window, float dt)
 
 
 	auto wUp = glm::vec4{0,1,0,0};
+
+	
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
@@ -45,6 +48,12 @@ void FPSCamera::update(struct GLFWwindow* window, float dt)
 		lookAt({ 0,getPosition().y,0 });
 	}
 
+
+	if (glfwGetKey(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS)
+	{
+		//glfwGetCursorPos(window,);
+//		translate(-m_forward * dt * m_moveSpeed);
+	}
 
 
 

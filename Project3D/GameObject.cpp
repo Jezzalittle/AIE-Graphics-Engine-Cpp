@@ -2,8 +2,6 @@
 #include "Application3D.h"
 #include "Camera.h"
 
-
-
 GameObject::GameObject()
 {
 }
@@ -49,6 +47,8 @@ void GameObject::bindShader()
 	assert(m_cam != nullptr);
 
 	glm::mat4 pvm = m_cam->getProjectionView() * m_transform;
+
+
 	m_shader.bindUniform("ProjectionViewModel", pvm);
 
 	m_shader.bindUniform("NormalMatrix", glm::inverseTranspose(glm::mat3(m_transform)));
@@ -78,14 +78,25 @@ void GameObject::bindShader()
 
 void GameObject::loadMesh(const char * a_path)
 {
-
-	if (m_mesh->load(a_path, true, true) == false)
-	{
-		printf(a_path);
+	if (m_mesh->load(a_path,true,true) == false)
+	{ 
+		printf("Dragon Mesh Error!\n");   
 	}
 }
 
 
+
+void GameObject::Update()
+{
+
+	//ImGui::Text("Hello, world %d", 123);
+
+
+	//for (size_t i = 0; i < m_lights.size(); i++)
+	//{
+	//	ImGui::InputFloat3("light " + i, glm::value_ptr(m_lights[i]->ambientLight));
+	//}
+}
 
 void GameObject::draw()
 {

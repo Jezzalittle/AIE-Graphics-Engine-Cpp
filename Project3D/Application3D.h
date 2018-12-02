@@ -4,8 +4,8 @@
 #include <glm\ext.hpp>
 #include <glm\glm.hpp>
 #include <Shader.h>
-#include <FPSCamera.h>
-
+#include <SpinCamera.h>
+#include <RenderTarget.h>
 #include "GameObject.h"
 
 class Application3D : public Application
@@ -31,15 +31,19 @@ protected:
 	Light* m_light2;
 
 
-	FPSCamera* m_cam;
+	SpinCamera* m_cam;
 	glm::mat4 m_viewMatrix;
 	glm::mat4 m_projectionMatrix;
 
 	GameObject* m_soulSpear;
 
+	Mesh m_fullscreenQuad;
+	aie::ShaderProgram m_postShader;
 
-	Mesh m_quadMesh;
-	glm::mat4 m_quadTransform;
+
+
+	aie::RenderTarget m_renderTarget;
+
 	
 private:
 

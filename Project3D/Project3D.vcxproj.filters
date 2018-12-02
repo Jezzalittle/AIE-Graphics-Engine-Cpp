@@ -40,10 +40,34 @@
     <None Include="..\bin\shaders\phong.vert">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\bin\shaders\PBR.frag">
+    <None Include="..\bin\shaders\diffOnly.frag">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\bin\shaders\PBR.vert">
+    <None Include="..\bin\shaders\diffOnly.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBRTest1.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBRTest1.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBRTest2.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBRTest2.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\simpleTexture.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\simpleTexture.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\post.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\post.vert">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

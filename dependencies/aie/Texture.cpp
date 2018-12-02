@@ -109,11 +109,11 @@ void Texture::create(unsigned int width, unsigned int height, Format format, uns
 	glGenTextures(1, &m_glHandle);
 	glBindTexture(GL_TEXTURE_2D, m_glHandle);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 
 	switch (m_format) {
 	case RED:
@@ -131,6 +131,11 @@ void Texture::create(unsigned int width, unsigned int height, Format format, uns
 	};
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Texture::bind(unsigned int slot) const {
+	glActiveTexture(GL_TEXTURE0 + slot);
+	glBindTexture(GL_TEXTURE_2D, m_glHandle);
 }
 
 } // namespace aie

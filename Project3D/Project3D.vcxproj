@@ -70,9 +70,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
-    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine;$(WindowsSDK_IncludePath); $(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui\;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;</IncludePath>
-    <LibraryPath>$(SolutionDir)build\Debug\Win32;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine\;$(WindowsSDK_IncludePath); $(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;</IncludePath>
+    <LibraryPath>$(SolutionDir)build\Debug\Win32\;$(SolutionDir)dependencies\glfw\lib-vc2017\;$(LibraryPath)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
@@ -106,6 +106,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;OpenGLEngine_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -151,10 +152,18 @@
     <ClInclude Include="GameObject.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\bin\shaders\PBR.frag" />
-    <None Include="..\bin\shaders\PBR.vert" />
+    <None Include="..\bin\shaders\diffOnly.frag" />
+    <None Include="..\bin\shaders\diffOnly.vert" />
+    <None Include="..\bin\shaders\PBRTest1.frag" />
+    <None Include="..\bin\shaders\PBRTest1.vert" />
+    <None Include="..\bin\shaders\PBRTest2.frag" />
+    <None Include="..\bin\shaders\PBRTest2.vert" />
     <None Include="..\bin\shaders\phong.frag" />
     <None Include="..\bin\shaders\phong.vert" />
+    <None Include="..\bin\shaders\post.frag" />
+    <None Include="..\bin\shaders\post.vert" />
+    <None Include="..\bin\shaders\simpleTexture.frag" />
+    <None Include="..\bin\shaders\simpleTexture.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

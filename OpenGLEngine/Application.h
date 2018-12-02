@@ -22,7 +22,7 @@ public:
 	int getWindowWidth() { return m_width; }
 	int getWindowHeight() { return m_height; }
 	const char* getWindowName() { return m_windowName; }
-	class GLFWwindow* getWindow() { return m_window;  }
+	struct GLFWwindow* getWindow() { return m_window;  }
 
 
 protected:
@@ -38,7 +38,7 @@ private:
 	std::chrono::high_resolution_clock::time_point m_startTime;
 	std::chrono::high_resolution_clock::time_point m_lastFrameTime;
 	float m_dt;
-	class GLFWwindow* m_window;
+	struct GLFWwindow* m_window;
 	int m_width;
 	int m_height;
 	const char* m_windowName;

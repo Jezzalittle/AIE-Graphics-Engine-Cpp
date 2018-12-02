@@ -1,6 +1,5 @@
 #pragma once
 
-#include <OBJMesh.h>
 #include <glm\ext.hpp>
 #include <glm\glm.hpp>
 #include <Shader.h>
@@ -8,6 +7,8 @@
 #include <Mesh.h>
 #include <vector>
 #include <RenderTarget.h>
+#include <OBJMesh.h>
+
 
 class ShaderProgram;
 class Camera;
@@ -57,7 +58,8 @@ public:
 	void loadTexture(const char* a_path);
 
 	aie::OBJMesh& getMesh() { assert(m_mesh == nullptr); return *m_mesh; }
-
+	
+	void Update();
 	void draw();
 
 
@@ -75,6 +77,7 @@ private:
 	aie::ShaderProgram m_shader;
 
 	
+
 	const char* m_meshPath;
 	glm::mat4 m_transform;
 	aie::OBJMesh* m_mesh;
