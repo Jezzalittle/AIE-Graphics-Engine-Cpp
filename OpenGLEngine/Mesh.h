@@ -25,7 +25,7 @@ public:
 		unsigned int indexCount = 0,
 		unsigned int* indices = nullptr);
 
-	virtual void draw();
+	void draw();
 
 protected:
 

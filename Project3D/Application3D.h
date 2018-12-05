@@ -40,6 +40,8 @@ protected:
 	Mesh m_fullscreenQuad;
 	aie::ShaderProgram m_postShader;
 
+	aie::ShaderProgram* m_phongShader;
+	aie::ShaderProgram* m_PBRShader;
 
 
 	aie::RenderTarget m_renderTarget;
@@ -47,8 +49,17 @@ protected:
 	
 private:
 
+	void DrawImgui();
+
 	float m_lightRotTimer;
 	float m_lightRotTimer2;
+
+	glm::vec3 m_backgroundColourGUI;
+	bool useBlurGUI;
+	float blurAmountGUI;
+	bool useDistortGUI;
+	float distortAmountGUI;
+	bool PBRShaderGUI;
 
 
 };
@@ -60,4 +71,5 @@ private:
 		glm::vec3 diffuse;
 		glm::vec3 specular;
 		glm::vec3 ambientLight;
+
 	};

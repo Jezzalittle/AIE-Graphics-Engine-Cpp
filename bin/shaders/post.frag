@@ -2,8 +2,17 @@
 #version 410
 
 in vec2 vTexCoord;
+
+uniform int hasBlur;
+uniform float blurAmount;
+uniform int hasDistort;
+uniform float distortAmount;
 uniform sampler2D colourTexture;
+
 out vec4 FragColour;
+
+vec4 finalTexture;
+
 
 // just output the colour unchanged
 vec4 Default(vec2 texCoord) 
@@ -16,7 +25,7 @@ vec4 Default(vec2 texCoord)
 vec4 BoxBlur(vec2 texCoord) 
 {    
 
-	vec2 texel = 1.0f / textureSize(colourTexture, 0);  
+	vec2 texel = blurAmount / textureSize(colourTexture, 0);  
  
 	// 9-tap box kernel  
 	vec4 colour = texture(colourTexture, texCoord);   
@@ -32,6 +41,19 @@ vec4 BoxBlur(vec2 texCoord)
 	return colour / 9; 
  }
 
+ vec4 Distort(vec2 texCoord) 
+ { 
+ 
+	vec2 mid = vec2(0.5f); 
+	
+	float distanceFromCentre = distance(texCoord, mid);  
+	vec2 normalizedCoord = normalize(texCoord - mid);  
+	float bias = distanceFromCentre + sin(distanceFromCentre * distortAmount) * 0.05f; 
+	
+	vec2 newCoord = mid + bias * normalizedCoord;  
+	return texture(colourTexture, newCoord); 
+ }
+
 void main() 
 {
 	// calculate texel size
@@ -42,6 +64,21 @@ void main()
 	vec2 scale = (texSize - texelSize) / texSize;
 	vec2 texCoord = vTexCoord / scale + texelSize * 0.5f;
 	
+
+	finalTexture = Default(texCoord);
+	
 	// sample post effect
-	FragColour = Default(texCoord);
+	if(hasDistort > 0)
+	{
+		finalTexture = Distort(texCoord);
+	}
+
+
+	if(hasBlur > 0)
+	{
+		finalTexture *= BoxBlur(texCoord);
+	}
+
+	FragColour = finalTexture;
+
 }

@@ -139,6 +139,6 @@ void Mesh::draw()
 	//using indices or just vertices?
 	if (ibo != 0)
 		glDrawElements(GL_TRIANGLES, 3 * triCount, GL_UNSIGNED_INT, 0);
-	else
+	//else
 		glDrawArrays(GL_TRIANGLES, 0, 3 * triCount);
 }

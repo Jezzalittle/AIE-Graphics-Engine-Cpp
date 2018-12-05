@@ -26,8 +26,7 @@ Application::Application()
 
 void Application::clearScreen()
 {
-	glClearColor(GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT, GL_COLOR_BUFFER_BIT);
-	aie::Gizmos::clear();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 int Application::createWindow(const char* a_windowName, int a_width, int a_height)
@@ -62,11 +61,11 @@ int Application::createWindow(const char* a_windowName, int a_width, int a_heigh
 	auto minor = ogl_GetMinorVersion();
 	std::cout << major << "." << minor << std::endl;
 
-	glEnable(GL_DEPTH);
-	// Enable Face culling
-	glEnable(GL_CULL_FACE);
-	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
 	// start input manager
@@ -103,10 +102,13 @@ int Application::run(const char * a_windowName, int a_width, int a_height)
 			auto timeTaken = now - m_lastFrameTime;
 			m_dt = std::chrono::duration<float>(timeTaken).count();
 			m_lastFrameTime = now;
-			m_elapsedTime = (now - m_startTime).count();
+			m_elapsedTime = (float)(now - m_startTime).count();
+
 
 			// clear input
 			Input::getInstance()->clearStatus();
+
+			glfwPollEvents();
 
 
 			glClearColor(m_backgroundColour.x, m_backgroundColour.y, m_backgroundColour.z, m_backgroundColour.w);
@@ -122,7 +124,7 @@ int Application::run(const char * a_windowName, int a_width, int a_height)
 			ImGui::Render();
 
 			glfwSwapBuffers(m_window);
-			glfwPollEvents();
+
 
 		}
 

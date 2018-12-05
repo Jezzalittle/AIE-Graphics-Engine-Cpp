@@ -49,6 +49,7 @@ const float refelctionCoefficient = 0.2f;
 
 vec3 CalcDirLight(Light light, vec3 a_normal, vec3 a_viewVector)
 {
+
 	vec3 lightDir = normalize(light.m_direction);
 	
 	float lambertTerm;
@@ -96,60 +97,27 @@ vec3 CalcDirLight(Light light, vec3 a_normal, vec3 a_viewVector)
 		//specularTerm = pow(max(0, dot(reflectionVector, a_viewVector)), specularPower);
 		
 
-	float NdotL = max(0, dot(a_normal, lightDir));
-	if (NdotL > 0) 
-	{
+		vec3 H = normalize( lightDir + a_viewVector ); // light and view half/avrage vector
+		float NdH = max(dot(a_viewVector, H), 0.0f);
+		float NdH2 = NdH * NdH;
 
-		//Cook-Torrance Specular Term
+		//Beckmann Distibition (how the light is distributed across a surface
+		float exponent = -(1 - NdH2) / (NdH2 * R2);
+		float D = pow(e,exponent) / (R2 * NdH2 * NdH2);
+		
+		//Schlick's Approximation of Fresnel (what happens to light on the edge of different materials)
+		float F = refelctionCoefficient + (1 - refelctionCoefficient) * pow(1 - NdE, 5);
+		
+		//Geometric Attenuation Factor (simulates shadowing caused by the microfacets(imperfections) on a surface
+		float X = 2.0f * NdH / dot(a_viewVector, H);
+		float G = min(1, min(X * NdE, X * NdL));
 
-		vec3 H = normalize(lightDir + a_viewVector);
-		float NdotH = max(0, dot(a_normal, H));
-		float NdotV = max(0, dot(a_normal, a_viewVector));
-		float VdotH = max(0, dot(lightDir, H));
+		//Claculate Cook-Torrance
+		specularTerm = max((D*G*F) / (NdE * pi), 0.0f);
 
-		// Fresnel reflectance
-		float F = pow(1.0 - VdotH, 5.0);
-		F *= (1.0 - 0.8f);
-		F += 0.8f;
-
-		// Microfacet distribution by Beckmann
-		float m_squared = roughness * roughness;
-		float r1 = 1.0 / (4.0 * m_squared * pow(NdotH, 4.0));
-		float r2 = (NdotH * NdotH - 1.0) / (m_squared * NdotH * NdotH);
-		float D = r1 * exp(r2);
-
-		// Geometric shadowing
-		float two_NdotH = 2.0 * NdotH;
-		float g1 = (two_NdotH * NdotV) / VdotH;
-		float g2 = (two_NdotH * NdotL) / VdotH;
-		float G = min(1.0, min(g1, g2));
-
-		specularTerm = (F * D * G) / (pi * NdotL * NdotV);
-
-
-	}
-
-//		vec3 H = normalize( lightDir + a_normalNormalised ); // light and view half/avrage vector
-//		float NdH = max(dot(a_normalNormalised, H), 0.0f);
-//		float NdH2 = NdH * NdH;
-//
-//		//Beckmann Distibition (how the light is distributed across a surface
-//		float exponent = -(1 - NdH2) / (NdH2 * R2);
-//		float D = pow(e,exponent) / (R2 * NdH2 * NdH2);
-//		
-//		//Schlick's Approximation of Fresnel (what happens to light on the edge of different materials)
-//		float F = refelctionCoefficient + (1 - refelctionCoefficient) * pow(1 - NdE, 5);
-//		
-//		//Geometric Attenuation Factor (simulates shadowing caused by the microfacets(imperfections) on a surface
-//		float X = 2.0f * NdH / dot(a_viewVector, H);
-//		float G = min(1, min(X * NdE, X * NdL));
-//
-//		//Claculate Cook-Torrance
-//		specularTerm = max((D*G*F) / (NdE * pi), 0.0f);
-
-		diffuse = light.m_diffuse * Kd * texDiffuse * NdotL * lambertTerm;
+		diffuse = light.m_diffuse * Kd * texDiffuse * NdL * lambertTerm;
 		ambient = light.m_ambient * Ka;
-		specular = light.m_specular  * Ks * NdotL * (0.2f + specularTerm * (1.0f - 0.2f));
+		specular = light.m_specular  * Ks * NdL * (0.2f + specularTerm * (1.0f - 0.2f));
 	}
 	
 	

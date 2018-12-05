@@ -57,8 +57,11 @@ public:
 	void loadMesh(const char* a_path);
 	void loadTexture(const char* a_path);
 
-	aie::OBJMesh& getMesh() { assert(m_mesh == nullptr); return *m_mesh; }
+	aie::OBJMesh& getMesh() { assert(m_mesh != nullptr); return *m_mesh; }
 	
+	void setShader(aie::ShaderProgram* a_shader) { m_shader = a_shader;  }
+	aie::ShaderProgram* getShader() { return m_shader; }
+
 	void Update();
 	void draw();
 
@@ -74,9 +77,8 @@ private:
 	std::vector<Light*> m_lights;
 
 	Camera* m_cam;
-	aie::ShaderProgram m_shader;
+	aie::ShaderProgram* m_shader;
 
-	
 
 	const char* m_meshPath;
 	glm::mat4 m_transform;

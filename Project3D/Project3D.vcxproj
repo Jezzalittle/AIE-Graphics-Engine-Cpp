@@ -81,8 +81,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
-    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine;$(WindowsSDK_IncludePath);$(IncludePath);</IncludePath>
-    <LibraryPath>$(SolutionDir)build\Debug\Win32;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(SolutionDir)OpenGLEngine\;$(WindowsSDK_IncludePath); $(SolutionDir)dependencies\stb;$(SolutionDir)dependencies\imgui;$(SolutionDir)dependencies\glcore;$(SolutionDir)dependencies\glm;$(SolutionDir)dependencies\aie;$(SolutionDir)dependencies\glfw\include;</IncludePath>
+    <LibraryPath>$(SolutionDir)build\Debug\x64;$(SolutionDir)dependencies\glfw\lib-vc2017;$(LibraryPath)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)build\$(Configuration)\$(Platform)</OutDir>
@@ -97,7 +97,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;OpenGLEngine_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -154,10 +154,8 @@
   <ItemGroup>
     <None Include="..\bin\shaders\diffOnly.frag" />
     <None Include="..\bin\shaders\diffOnly.vert" />
-    <None Include="..\bin\shaders\PBRTest1.frag" />
-    <None Include="..\bin\shaders\PBRTest1.vert" />
-    <None Include="..\bin\shaders\PBRTest2.frag" />
-    <None Include="..\bin\shaders\PBRTest2.vert" />
+    <None Include="..\bin\shaders\PBRTest.frag" />
+    <None Include="..\bin\shaders\PBRTest.vert" />
     <None Include="..\bin\shaders\phong.frag" />
     <None Include="..\bin\shaders\phong.vert" />
     <None Include="..\bin\shaders\post.frag" />

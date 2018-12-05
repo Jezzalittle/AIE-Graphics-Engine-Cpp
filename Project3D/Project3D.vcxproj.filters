@@ -46,18 +46,6 @@
     <None Include="..\bin\shaders\diffOnly.vert">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="..\bin\shaders\PBRTest1.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\bin\shaders\PBRTest1.vert">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\bin\shaders\PBRTest2.frag">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\bin\shaders\PBRTest2.vert">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="..\bin\shaders\simpleTexture.frag">
       <Filter>Source Files</Filter>
     </None>
@@ -68,6 +56,12 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\bin\shaders\post.vert">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBRTest.frag">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\bin\shaders\PBRTest.vert">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

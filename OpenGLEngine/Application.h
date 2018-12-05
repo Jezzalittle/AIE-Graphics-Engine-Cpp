@@ -28,6 +28,7 @@ public:
 protected:
 
 	void setBackgroundColour(float x, float y, float z) { m_backgroundColour = glm::vec4(x, y, z, 1.0f); }
+	glm::vec3 getBackgroundColour() { return m_backgroundColour; }
 	void clearScreen();
 
 private:
