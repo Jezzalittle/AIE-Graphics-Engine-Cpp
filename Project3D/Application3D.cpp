@@ -162,6 +162,7 @@ void Application3D::DrawImgui()
 	ImGui::Text("'S' = Move Back");
 	ImGui::Text("'Space' = Move Up");
 	ImGui::Text("'Left-Shift' = Move Down");
+	ImGui::Text("'ESC' = Quit");
 
 	ImGui::End();
 
@@ -213,7 +214,7 @@ void Application3D::DrawImgui()
 	ImGui::Text("Light Settings");
 	ImGui::DragFloat3("Direction", glm::value_ptr(m_light->direction), 0.1f, -1.0f, 1.0f);
 	ImGui::DragFloat3("Diffuse Colour", glm::value_ptr(m_light->diffuse), 1.0f, 0, 255.0f);
-	ImGui::DragFloat3("specular Colour", glm::value_ptr(m_light->specular), 1.0f, 0, 255.0f);
+	ImGui::DragFloat3("Specular Colour", glm::value_ptr(m_light->specular), 1.0f, 0, 255.0f);
 
 
 	ImGui::End();

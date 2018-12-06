@@ -15,7 +15,7 @@ public:
 	virtual void draw() = 0;
 	virtual int onStartup() = 0;
 	virtual void onShutdown() = 0;
-	int run(const char* a_windowName, int a_width, int a_height);
+	int run(const char* a_windowName, int a_width, int a_height, bool a_fullscreen);
 
 	float getElapsedTime() { return m_elapsedTime; }
 	float getDeltaTime() { return m_dt; }
@@ -43,7 +43,7 @@ private:
 	int m_width;
 	int m_height;
 	const char* m_windowName;
-	int createWindow(const char* a_windowName, int a_width, int a_height);
+	int createWindow(const char* a_windowName, int a_width, int a_height, bool a_fullscreen);
 	void shutdown();
 
 };

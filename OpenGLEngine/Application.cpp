@@ -29,7 +29,7 @@ void Application::clearScreen()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-int Application::createWindow(const char* a_windowName, int a_width, int a_height)
+int Application::createWindow(const char* a_windowName, int a_width, int a_height, bool a_fullScreen)
 {
 	m_windowName = a_windowName;
 	m_width = a_width;
@@ -40,7 +40,7 @@ int Application::createWindow(const char* a_windowName, int a_width, int a_heigh
 		return -1;
 	}
 
-	m_window = glfwCreateWindow(m_width, m_height, m_windowName, nullptr, nullptr);
+	m_window = glfwCreateWindow(m_width, m_height, m_windowName, (a_fullScreen ? glfwGetPrimaryMonitor() : nullptr), nullptr);
 
 	if (m_window == nullptr)
 	{
@@ -92,11 +92,11 @@ Application::~Application()
 
 }
 
-int Application::run(const char * a_windowName, int a_width, int a_height)
+int Application::run(const char * a_windowName, int a_width, int a_height, bool a_fullscreen)
 {
-	if (createWindow(a_windowName, a_width, a_height) == 0 && onStartup() == 0)
+	if (createWindow(a_windowName, a_width, a_height, a_fullscreen) == 0 && onStartup() == 0)
 	{
-		while (!glfwWindowShouldClose(m_window) || glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		while (!glfwWindowShouldClose(m_window))
 		{
 			auto now = std::chrono::high_resolution_clock::now();
 			auto timeTaken = now - m_lastFrameTime;
@@ -122,6 +122,11 @@ int Application::run(const char * a_windowName, int a_width, int a_height)
 
 			// draw IMGUI last
 			ImGui::Render();
+
+			if (glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			{
+				break;
+			}
 
 			glfwSwapBuffers(m_window);
 
