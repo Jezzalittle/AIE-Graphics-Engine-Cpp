@@ -87,7 +87,7 @@ int Application3D::onStartup()
 	useDistortGUI = false;
 	distortAmountGUI = 15.0f;
 	PBRShaderGUI = true;
-
+	open = true;
 
 	return 0;
 }
@@ -157,7 +157,7 @@ void Application3D::draw()
 
 void Application3D::DrawImgui()
 {
-	ImGui::Begin("Controls");
+	ImGui::Begin("Controls", &open, ImGuiWindowFlags_NoMove);
 	ImGui::Text("'W' = Move Forward");
 	ImGui::Text("'S' = Move Back");
 	ImGui::Text("'Space' = Move Up");
@@ -166,7 +166,7 @@ void Application3D::DrawImgui()
 
 	ImGui::End();
 
-	ImGui::Begin("Settings");
+	ImGui::Begin("Settings", &open, ImGuiWindowFlags_NoMove);
 
 	ImGui::Spacing();
 	ImGui::Spacing();
@@ -216,8 +216,29 @@ void Application3D::DrawImgui()
 	ImGui::DragFloat3("Diffuse Colour", glm::value_ptr(m_light->diffuse), 1.0f, 0, 255.0f);
 	ImGui::DragFloat3("Specular Colour", glm::value_ptr(m_light->specular), 1.0f, 0, 255.0f);
 
+	ImGui::Spacing();
+	ImGui::Spacing();
+
+	if (ImGui::Button("Reset"))
+	{
+		Reset();
+	}
 
 	ImGui::End();
+}
+
+void Application3D::Reset()
+{
+	m_backgroundColourGUI = { 255, 255, 255 };
+	useBlurGUI = false;
+	blurAmountGUI = 2.0f;
+	useDistortGUI = false;
+	distortAmountGUI = 15.0f;
+	PBRShaderGUI = true;
+	m_light->direction = { 0.3f, -0.6f, -1.0f };
+	m_light->diffuse = { 9, 6, 0 };
+	m_light->specular = { 6, 1, 0 };
+	m_light->ambientLight = { 0, 0, 0 };
 }
 
 Application3D::~Application3D()

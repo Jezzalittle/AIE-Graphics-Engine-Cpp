@@ -50,6 +50,7 @@ protected:
 private:
 
 	void DrawImgui();
+	void Reset();
 
 	float m_lightRotTimer;
 	float m_lightRotTimer2;
@@ -60,6 +61,8 @@ private:
 	bool useDistortGUI;
 	float distortAmountGUI;
 	bool PBRShaderGUI;
+
+	bool open;
 
 
 };
